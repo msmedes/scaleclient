@@ -1,1 +1,1 @@
-{ "extends": ["wesbos"] }
+{ "extends": ["wesbos"], "rules": { "semi": [2, "never"] } }

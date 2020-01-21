@@ -23,7 +23,7 @@ export const GET_NODE_MD_WITH_TRACE = gql`
           addr
         }
         keys
-        fingerTable
+        fingerTableAddrs
       }
     }
   }
@@ -44,7 +44,7 @@ export const GET_NODE_MD = gql`
           addr
         }
         keys
-        fingerTable
+        fingerTableAddrs
       }
     }
   }

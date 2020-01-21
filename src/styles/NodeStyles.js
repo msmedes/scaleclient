@@ -10,6 +10,11 @@ const NodeStyles = styled.li`
   position: absolute;
   top: 33%;
   left: 33%;
+  p{
+    text-align: center;
+    margin-top: 2px;
+    margin-bottom: 0px;
+  }
 `;
 
 export default NodeStyles

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const Trace = ({ traceEntry }) => {
   return (
@@ -8,8 +8,9 @@ const Trace = ({ traceEntry }) => {
         <tr><td>Function: {traceEntry.functionCall}</td></tr>
         <tr><td>Duration: {traceEntry.duration}</td></tr>
       </tbody>
-    </table >
-  );
+      <button>Close</button>
+    </table>
+  )
 }
 
-export default Trace;
+export default Trace
