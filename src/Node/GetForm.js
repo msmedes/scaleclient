@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { Form } from '../styles/Form';
+
 const GetForm = ({ handleGetSubmit }) => {
   const [get, setGet] = useState("");
 
@@ -8,10 +10,10 @@ const GetForm = ({ handleGetSubmit }) => {
     setGet("")
   }
   return (
-    <form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <input type="text" name="get" value={get} onChange={e => setGet(e.target.value)} />
       <button type="submit">Get</button>
-    </form>
+    </Form>
   )
 }
 

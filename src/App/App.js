@@ -1,11 +1,11 @@
 import React from 'react';
 
-import Node from '../Node/Node'
+import Nodes from '../Nodes/Nodes'
 
 const App = () => {
   return (
     <>
-    <Node />
+      <Nodes />
     </>
   )
 }
