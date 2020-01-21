@@ -6,7 +6,7 @@ import { ApolloProvider } from '@apollo/client';
 import NodesStyles from '../styles/NodesStyles';
 
 const Nodes = () => {
-  const ports = ['8000', '8001', '8002', '8003', '8004', '8005', '8006', '8007'];
+  const ports = ['8000', '8001', '8002'];
 
   const calcRotateAngle = (i, length) => {
     const offsetAngle = 360 / length;

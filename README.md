@@ -1,10 +1,14 @@
 # scaleclient
 
+## Running locally
 
-# Chord circle creation
+You will need at least one [scale](https://github.com/msmedes/scale) client running. Just follow the instructions in the `readme` over there for instructions on how that works.
 
-create a context with reducers, I guess?
-load the nodes, I guess
-get pred and succ ids,
-pass succ and pred up to Nodes, order the array by those relationships (can probably be from any node)
-rerender
+Right now the node addresses are hardcoded into the `Nodes` component.
+You can remove them if you want but you won't get a nice circle with less than, like, 5 nodes.
+
+You will need `npm` or `yarn` I guess. Right now there's only one command: `npm start`. The client should start up on `localhost:1234`.
+
+## Running in production
+
+You probably shouldn't do this.

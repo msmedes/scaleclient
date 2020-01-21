@@ -16,8 +16,8 @@ const SetForm = ({ handleSetSubmit }) => {
   return (
     <Form onSubmit={handleSubmit}>
       <fieldset>
-        <input type="text" name="key" value={key} onChange={e => setKey(e.target.value)} required />
-        <input type="text" name="value" value={value} onChange={e => setValue(e.target.value)} required />
+        <input type="text" name="key" value={key} onChange={e => setKey(e.target.value)} required placeholder="key" />
+        <input type="text" name="value" value={value} onChange={e => setValue(e.target.value)} required placeholder="value" />
         <button type="submit">Set</button>
       </fieldset>
     </Form>

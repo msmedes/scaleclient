@@ -11,7 +11,7 @@ const GetForm = ({ handleGetSubmit }) => {
   }
   return (
     <Form onSubmit={handleSubmit}>
-      <input type="text" name="get" value={get} onChange={e => setGet(e.target.value)} />
+      <input type="text" name="get" value={get} onChange={e => setGet(e.target.value)} placeholder="key" />
       <button type="submit">Get</button>
     </Form>
   )
