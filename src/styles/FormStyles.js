@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-const Form = styled.form`
+const FormStyles = styled.form`
   background: rgba(0,0,00, 0.02);
   padding: 2px;
   font-size: .5rem;
@@ -30,6 +30,7 @@ const Form = styled.form`
     font-size: .75rem;
     font-weight: 600;
     padding: 0.2rem 0.25rem;
+    box-shadow: 0 0 2px grey;
   }
   fieldset{
     border: 0;
@@ -40,4 +41,4 @@ const Form = styled.form`
   }
 `
 
-export { Form }
+export default FormStyles

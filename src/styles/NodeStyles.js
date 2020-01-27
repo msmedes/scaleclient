@@ -1,20 +1,23 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const NodeStyles = styled.li`
-  border: 1px solid black;
-  border-radius: 1px;
-  width: 125px;
-  background: rgba(57, 62, 120, 0.1);
-  transform: ${props => `rotate(${props.rotateAngle}deg) translate(0, -250px) rotate(-${props.rotateAngle}deg)`};
-  list-style: none;
+  display: block;
   position: absolute;
-  top: 33%;
-  left: 33%;
+  border: 1px solid;
+  border-radius: 1px;
+  background: ${(props) => (props.isFinger ? 'rgba(57, 62, 120, .1)' : '#fafafa')};
+  border-color: ${(props) => (props.inTrace ? 'blue' : 'black')};
+  box-shadow: ${(props) => (props.inTrace ? '0 0 2px blue' : '0 0 2px grey')};
+  width: 125px;
+  margin: -30px;
+  transform: ${(props) => `rotate(${props.rotateAngle}deg) translate(0, -325px) rotate(-${props.rotateAngle}deg)`};
+  top: 50%;
+  left: 25%;
   p{
     text-align: center;
     margin-top: 2px;
     margin-bottom: 0px;
   }
-`;
+`
 
 export default NodeStyles

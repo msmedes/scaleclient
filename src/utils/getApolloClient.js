@@ -6,18 +6,15 @@ import { onError } from 'apollo-link-error'
 import { ApolloLink } from 'apollo-link'
 
 const getApolloClient = (port) => {
-
   const httpLink = new HttpLink({
-    uri: `http://localhost:${port}/graphql`
+    uri: `http://localhost:${port}/graphql`,
   })
 
   const errorLink = onError(({ graphQLErrors, networkError }) => {
     if (graphQLErrors) {
-      graphQLErrors.map(({ message, locations, path }) =>
-        console.log(
-          `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-        )
-      )
+      graphQLErrors.map(({ message, locations, path }) => console.log(
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
+      ))
     }
 
     if (networkError) {
@@ -33,10 +30,10 @@ const getApolloClient = (port) => {
 
   const client = new ApolloClient({
     link,
-    cache
+    cache,
   })
 
-  return client;
+  return client
 }
 
-export default getApolloClient;
+export default getApolloClient

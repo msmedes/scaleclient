@@ -1,10 +1,11 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const NodesStyles = styled.ul`
   border-radius: 50%;
-  position: relative;
-  height: 750px;
-  width: 750px;
-`;
+  height: 725px;
+  width: 725px;
+  padding: 0;
+  list-style: none;
+`
 
-export default NodesStyles;
+export default NodesStyles
