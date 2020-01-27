@@ -33,22 +33,21 @@ const NodesController = () => {
   fingerTableAddrs.push(predAddr)
   const uniqueFingers = findUniqueFingers(fingerTableAddrs)
   let network = calcNetwork(networkAddrs, headNodePort, uniqueFingers)
-
+  let trace
   if (variables.key) {
-    console.log('trace', data.get.trace)
+    trace = data.get.trace
     network = calcTrace(network, data.get.trace)
-    console.log('network', network)
   }
 
   if (mutationData) {
-    console.log('mutationdata', mutationData)
+    trace = mutationData.set.trace
     network = calcTrace(network, mutationData.set.trace)
   }
 
   return (
     <NodeMutationContext.Provider value={runMutation}>
       <NodeRefetchContext.Provider value={refetch}>
-        <Nodes network={network} />
+        <Nodes network={network} trace={trace} />
         {mutationLoading && <p>Setting...</p>}
         {mutationError && <Error error={mutationError} />}
       </NodeRefetchContext.Provider>

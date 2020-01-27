@@ -1,10 +1,3 @@
-// parses the graphql port for an address in the format of 0.0.0.0:3001
-// would return '8001' for the above example
-const parsePort = (addr) => {
-  const port = addr.split(':')[1]
-  return `8${port.substr(1)}`
-}
-
 // calculates the rotation angle for the css transform
 const calcRotateAngle = (i, numNodes) => {
   const offsetAngle = 360 / numNodes
@@ -54,8 +47,6 @@ const findUniqueFingers = (fingerTable) => {
 
 const calcTrace = (network, trace) => {
   const tracePorts = trace.map((node) => node.addr)
-  console.log('traceports', tracePorts)
-  console.log('network', network)
   const networkTrace = network.map((node) => {
     const currNode = { ...node }
     if (tracePorts.indexOf(node.addr) !== -1) {
@@ -66,6 +57,19 @@ const calcTrace = (network, trace) => {
   return networkTrace
 }
 
+const createTrace = (trace) => {
+  // const tracePorts = trace.map((node) => node.addr)
+  const traceInfo = trace.map((step, index) => {
+    const to = index === trace.length - 1 ? trace[0].addr : trace[index + 1].addr
+    return {
+      from: step.addr,
+      functionCall: step.functionCall,
+      duration: step.duration,
+      to,
+    }
+  })
+  return traceInfo
+}
 export {
-  findUniqueFingers, calcRotateAngle, calcNetwork, calcTrace,
+  findUniqueFingers, calcRotateAngle, calcNetwork, calcTrace, createTrace,
 }
