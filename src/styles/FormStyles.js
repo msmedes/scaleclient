@@ -1,10 +1,7 @@
 import styled from 'styled-components'
 
 const FormStyles = styled.form`
-  background: rgba(0,0,00, 0.02);
-  padding: 2px;
-  font-size: .5rem;
-  font-weight: 600;
+  width: 100px;
   label {
     display: block;
     margin-bottom: 1rem;

@@ -4,8 +4,8 @@ const calcRotateAngle = (i, numNodes) => {
   return offsetAngle * i
 }
 
-const calcNetwork = (network, headNodePort, fingers) => {
-  const networkPorts = network.slice(1, network.length - 1)
+const calcNetwork = (network, headNodePort, fingers, predAddr) => {
+  const networkPorts = network.slice(1)
   const fingerPorts = fingers.map((finger) => finger.addr)
   const headNode = {
     headNode: true, isFinger: false, addr: headNodePort.addr.toString(),
@@ -22,7 +22,17 @@ const calcNetwork = (network, headNodePort, fingers) => {
     return currNode
   })
 
-  return [headNode, ...nodes]
+  const predNode = { headNode: false, addr: predAddr.toString() }
+  const predIndex = fingerPorts.indexOf(predAddr)
+
+  if (predIndex !== -1) {
+    const predFinger = fingers[predIndex]
+    predNode.isFinger = true
+    predNode.start = predFinger.start.toString()
+    predNode.end = predFinger.end.toString()
+  }
+
+  return [headNode, ...nodes, predNode]
 }
 
 // gets the unique values of the finger table
@@ -48,9 +58,12 @@ const findUniqueFingers = (fingerTable) => {
 const calcTrace = (network, trace) => {
   const tracePorts = trace.map((node) => node.addr)
   const networkTrace = network.map((node) => {
+    const traceIndex = tracePorts.indexOf(node.addr)
     const currNode = { ...node }
-    if (tracePorts.indexOf(node.addr) !== -1) {
+    if (traceIndex !== -1) {
       currNode.inTrace = true
+      currNode.functionCall = trace[traceIndex].functionCall
+      currNode.duration = trace[traceIndex].duration
     }
     return currNode
   })
@@ -70,6 +83,9 @@ const createTrace = (trace) => {
   })
   return traceInfo
 }
+
+const parsePort = (addr) => `8${addr.substr(1)}`
+
 export {
-  findUniqueFingers, calcRotateAngle, calcNetwork, calcTrace, createTrace,
+  findUniqueFingers, calcRotateAngle, calcNetwork, calcTrace, createTrace, parsePort,
 }

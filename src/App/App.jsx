@@ -3,6 +3,7 @@ import { ApolloProvider } from '@apollo/client'
 
 import getApolloClient from '../utils/getApolloClient'
 
+import { parsePort } from '../utils/nodeUtils'
 import NodesController from '../NodesController/NodesController'
 import GetForm from '../Forms/GetForm'
 
@@ -13,12 +14,12 @@ const App = () => {
 
   const handleGetSubmit = (e, val) => {
     e.preventDefault()
-    setHeadNode(val)
+    setHeadNode(parsePort(val))
   }
 
   return (
     <ApolloProvider client={client}>
-      {/* <GetForm handleGetSubmit={handleGetSubmit} command="Set Node" /> */}
+      <GetForm handleGetSubmit={handleGetSubmit} command="Set Node" />
       <NodesController client={client} />
     </ApolloProvider>
   )

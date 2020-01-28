@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react'
+import React, { useState } from 'react'
 import { useQuery, useMutation } from '@apollo/client'
 import NProgress from 'nprogress'
 
@@ -16,11 +16,14 @@ const NodesController = () => {
     loading, error, data, refetch, variables,
   } = useQuery(GET_NODE_MD_WITH_TRACE_AND_NETWORK, {
     variables: { key: '' },
+    pollInterval: 60000,
   })
 
-  const [runMutation, { loading: mutationLoading, error: mutationError, data: mutationData }] = useMutation(SET_KEY)
+  const [runMutation, {
+    loading: mutationLoading, error: mutationError, data: mutationData,
+  }] = useMutation(SET_KEY)
 
-  if (loading) return <div>Loading network information...</div>
+  if (loading) return <div>Loading network...</div>
   if (error) return <Error error={error} />
 
 
@@ -30,20 +33,24 @@ const NodesController = () => {
   const { fingerTableAddrs } = headNodePort
   const { addr: predAddr } = headNodePort.predecessor
 
-  fingerTableAddrs.push(predAddr)
   const uniqueFingers = findUniqueFingers(fingerTableAddrs)
-  let network = calcNetwork(networkAddrs, headNodePort, uniqueFingers)
+  let network = calcNetwork(networkAddrs, headNodePort, uniqueFingers, predAddr)
+
   let trace
-  if (variables.key) {
-    trace = data.get.trace
-    network = calcTrace(network, data.get.trace)
-  }
 
   if (mutationData) {
     trace = mutationData.set.trace
     network = calcTrace(network, mutationData.set.trace)
+    console.log('mutationData', mutationData)
   }
 
+  if (variables.key) {
+    trace = data.get.trace
+    network = calcTrace(network, data.get.trace)
+    console.log('variables.key', trace)
+  }
+
+  // console.log('networkState', networkState)
   return (
     <NodeMutationContext.Provider value={runMutation}>
       <NodeRefetchContext.Provider value={refetch}>

@@ -31,7 +31,9 @@ const Nodes = ({ network, trace }) => {
           />
         ))
       }
-      {/* traceInfo && (
+      {/*
+        This shit is whack
+        traceInfo && (
         traceInfo.map((entry) => <LineTo key={`${entry.functionCall}${entry.from}`} from={`${entry.from}`} to={`${entry.to}`} borderWidth={2} />)
       ) */}
     </NodesStyles>
