@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 
 import FormStyles from '../styles/FormStyles'
 
@@ -15,6 +16,11 @@ const GetForm = ({ handleGetSubmit, command }) => {
       <button type="submit">{command}</button>
     </FormStyles>
   )
+}
+
+GetForm.propTypes = {
+  handleGetSubmit: PropTypes.func.isRequired,
+  command: PropTypes.string.isRequired,
 }
 
 export default GetForm
