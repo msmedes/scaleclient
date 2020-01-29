@@ -4,7 +4,8 @@ const NodesStateContext = createContext()
 const NodesDispatchContext = createContext()
 const NodeRefetchContext = createContext()
 const NodeMutationContext = createContext()
+const TraceContext = createContext()
 
 export {
-  NodesStateContext, NodesDispatchContext, NodeRefetchContext, NodeMutationContext,
+  NodesStateContext, NodesDispatchContext, NodeRefetchContext, NodeMutationContext, TraceContext,
 }

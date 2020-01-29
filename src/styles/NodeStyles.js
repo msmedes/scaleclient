@@ -5,11 +5,10 @@ const NodeStyles = styled.li`
   justify-content: center;
   align-items: center;
   position: absolute;
-  border: 1px solid;
   border-radius: 50%;
-  background: ${(props) => (props.isFinger ? 'rgba(57, 62, 120, .1)' : '#fafafa')};
-  border-color: ${(props) => (props.inTrace ? 'blue' : 'black')};
-  box-shadow: ${(props) => (props.inTrace ? '0 0 2px blue' : '0 0 2px grey')};
+  background: ${(props) => (props.isFinger ? 'hsl(218, 12%, 80%)' : 'hsl(218, 12%, 92%)')};
+  background: ${(props) => (props.inTrace && 'hsl(218, 25%, 77%)')};
+  box-shadow: ${(props) => (props.inTrace ? '1px 1px 1px hsl(218, 25%, 77%)' : 'hsl(218, 12%, 92%)')};
   width: 125px;
   height: 125px;
   margin: -30px;
@@ -20,6 +19,19 @@ const NodeStyles = styled.li`
     text-align: center;
     margin-top: 1px;
     margin-bottom: 0px;
+    color: ${(props) => ((props.isFinger || props.headNode || props.inTrace) ? 'hsl(218, 5%, 18%)' : 'hsl(218, 5%, 35%)')}
+  }
+  .fingerIndices{
+    color: hsl(218, 5%, 40%);
+    font-weight: 400;
+  }
+  .functionCall{
+
+  }
+  .duration{
+  }
+  .addr{
+    font-weight: ${(props) => ((props.isFinger || props.headNode || props.inTrace) ? '500' : '400')};
   }
 `
 
