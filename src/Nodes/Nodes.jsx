@@ -42,16 +42,17 @@ const Nodes = ({
 
 
   network = network.map((node, index) => {
-    const currNode = { ...node }
+    const currNode = node
     currNode.rotateAngle = calcRotateAngle(index, network.length)
     return currNode
   })
 
   network = network.map((node) => {
-    if (node.inTrace) {
-      node.targetAngle = network[node.targetId].rotateAngle
+    const currNode = node
+    if (currNode.inTrace) {
+      currNode.targetAngle = network[currNode.targetId].rotateAngle
     }
-    return node
+    return currNode
   })
 
   return (
