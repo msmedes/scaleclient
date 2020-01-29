@@ -2,8 +2,10 @@ import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { ArcherElement } from 'react-archer'
 
-import { NodeRefetchContext, NodeMutationContext, TraceContext } from '../context/NodesContext'
-import { calcAnchor } from '../utils/nodeUtils'
+import {
+  NodeRefetchContext, NodeMutationContext, TraceContext, HeadNodeContext,
+} from '../context/NodesContext'
+import { calcSourceAnchor, calcTargetAnchor } from '../utils/nodeUtils'
 
 import GetForm from '../Forms/GetForm'
 import SetForm from '../Forms/SetForm'
@@ -14,7 +16,6 @@ import NodeStyles from '../styles/NodeStyles'
 const Node = ({
   node, index,
 }) => {
-  const { setTraceType } = useContext(TraceContext)
   const {
     headNode,
     isFinger,
@@ -29,6 +30,9 @@ const Node = ({
   } = node
   const refetch = useContext(NodeRefetchContext)
   const runMutation = useContext(NodeMutationContext)
+  const { setTraceType } = useContext(TraceContext)
+  const setHeadNode = useContext(HeadNodeContext)
+
   const handleGetSubmit = (e, get) => {
     e.preventDefault()
     setTraceType('get')
@@ -45,13 +49,26 @@ const Node = ({
   if (inTrace) {
     relations = [{
       targetId: `${targetId}`,
-      sourceAnchor: `${calcAnchor(rotateAngle)}`,
-      targetAnchor: `${calcAnchor(node.targetAngle)}`,
+      sourceAnchor: `${calcSourceAnchor(rotateAngle)}`,
+      targetAnchor: `${calcTargetAnchor(node.targetAngle)}`,
     }]
   }
 
+  const handleHeadNodeClick = () => {
+    if (!headNode) {
+      const port = `8${node.addr.split(':')[1].slice(1)}`
+      setHeadNode(port)
+    }
+  }
+
   return (
-    <NodeStyles headNode={headNode} rotateAngle={rotateAngle} inTrace={inTrace} isFinger={isFinger}>
+    <NodeStyles
+      headNode={headNode}
+      rotateAngle={rotateAngle}
+      inTrace={inTrace}
+      isFinger={isFinger}
+      onClick={handleHeadNodeClick}
+    >
       <ArcherElement
         id={`${index}`}
         relations={relations}
@@ -89,5 +106,6 @@ const Node = ({
 
 Node.propTypes = {
   node: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired,
 }
 export default Node

@@ -4,16 +4,34 @@ const calcRotateAngle = (i, numNodes) => {
   return offsetAngle * i
 }
 
-const calcAnchor = (rotateAngle) => {
+// this mostly works
+const calcSourceAnchor = (rotateAngle) => {
+  let direction = ''
   if (rotateAngle >= 0 && rotateAngle < 90) {
-    return 'bottom'
+    direction = 'bottom'
   } if (rotateAngle >= 90 && rotateAngle < 180) {
-    return 'left'
+    direction = 'left'
   } if (rotateAngle >= 180 && rotateAngle < 270) {
-    return 'top'
+    direction = 'top'
   } if (rotateAngle >= 270) {
-    return 'right'
+    direction = 'right'
   }
+  return direction
+}
+
+// this also mostly works
+const calcTargetAnchor = (rotateAngle) => {
+  let direction = ''
+  if ((rotateAngle >= 315) || (rotateAngle >= 0 && rotateAngle < 45)) {
+    direction = 'bottom'
+  } if (rotateAngle >= 45 && rotateAngle < 135) {
+    direction = 'left'
+  } if (rotateAngle >= 135 && rotateAngle < 225) {
+    direction = 'top'
+  } if (rotateAngle >= 225 && rotateAngle < 315) {
+    direction = 'right'
+  }
+  return direction
 }
 
 
@@ -87,7 +105,6 @@ const calcTraceLines = (network, trace) => {
     node.targetId = nodeIndices.indexOf(tracePorts[nextTracePort])
     currNetwork[nodeIndex] = node
   }
-  console.log('currNetwork', currNetwork)
   return currNetwork
 }
 
@@ -100,5 +117,6 @@ export {
   calcTraceLines,
   createTrace,
   parsePort,
-  calcAnchor,
+  calcSourceAnchor,
+  calcTargetAnchor,
 }

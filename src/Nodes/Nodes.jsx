@@ -19,7 +19,6 @@ const Nodes = ({
   const { node: headNodePort } = data.metadata
   const { fingerTableAddrs } = headNodePort
   const { addr: predAddr } = headNodePort.predecessor
-  console.log('networkaddrs', networkAddrs)
 
   const uniqueFingers = findUniqueFingers(headNodePort.addr, fingerTableAddrs)
   let network = calcNetwork(networkAddrs, headNodePort, uniqueFingers, predAddr)
@@ -41,7 +40,6 @@ const Nodes = ({
     network = calcTraceLines(network, trace)
   }
 
-  console.log('nodes', network)
 
   network = network.map((node, index) => {
     const currNode = { ...node }
@@ -52,17 +50,12 @@ const Nodes = ({
   network = network.map((node) => {
     if (node.inTrace) {
       node.targetAngle = network[node.targetId].rotateAngle
-      console.log('whats hte deal', network[node.targetId])
-      console.log('targetAngle', node.targetAngle)
     }
     return node
   })
 
-
-  console.log('archer network', network)
-
   return (
-    <ArcherContainer strokeColor="hsl(206, 98%, 39%)" strokeWidth="2">
+    <ArcherContainer strokeColor="hsl(206, 98%, 39%)" strokeWidth="3" arrowLength="0" arrowThickness="0">
       <NodesStyles>
         {
           network.map((node, index) => (

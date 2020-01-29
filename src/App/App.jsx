@@ -2,25 +2,21 @@ import React, { useState } from 'react'
 import { ApolloProvider } from '@apollo/client'
 
 import getApolloClient from '../utils/getApolloClient'
+import { HeadNodeContext } from '../context/NodesContext'
 
-import { parsePort } from '../utils/nodeUtils'
 import NodesController from '../NodesController/NodesController'
-import GetForm from '../Forms/GetForm'
+
 
 const App = () => {
   const [headNode, setHeadNode] = useState('8000')
 
   const client = getApolloClient(headNode)
 
-  const handleGetSubmit = (e, val) => {
-    e.preventDefault()
-    setHeadNode(parsePort(val))
-  }
-
   return (
     <ApolloProvider client={client}>
-      <GetForm handleGetSubmit={handleGetSubmit} command="Set Node" />
-      <NodesController client={client} />
+      <HeadNodeContext.Provider value={setHeadNode}>
+        <NodesController client={client} />
+      </HeadNodeContext.Provider>
     </ApolloProvider>
   )
 }
