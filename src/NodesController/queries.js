@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 const GET_NODE_MD_WITH_TRACE_AND_NETWORK = gql`
-  query GET_NODE_MD_WITH_TRACE($key:  String!){
+  query GET_NODE_MD_WITH_TRACE($key: String!){
     getNetwork {
       nodes
     }
@@ -34,6 +34,9 @@ const GET_NODE_MD_WITH_TRACE_AND_NETWORK = gql`
 
 const GET_NODE_MD = gql`
   query GET_NODE_MD {
+    getNetwork {
+      nodes
+    }
     metadata {
       node {
         id

@@ -6,6 +6,10 @@ const NodesStyles = styled.ul`
   height: 725px;
   width: 725px;
   list-style: none;
+  .vals{
+    padding-left: 475px;
+    padding-top: 35px;
+  }
 `
 
 export default NodesStyles

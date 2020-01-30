@@ -2,19 +2,15 @@ import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { ArcherElement } from 'react-archer'
 
-import {
-  NodeRefetchContext, NodeMutationContext, TraceContext, HeadNodeContext,
-} from '../context/NodesContext'
+import { HeadNodeContext, TraceContext } from '../context/NodesContext'
 import { calcSourceAnchor, calcTargetAnchor } from '../utils/nodeUtils'
 
-import GetForm from '../Forms/GetForm'
-import SetForm from '../Forms/SetForm'
 
 import NodeStyles from '../styles/NodeStyles'
 
 
 const Node = ({
-  node, index,
+  node, index, val, queryKey,
 }) => {
   const {
     headNode,
@@ -28,22 +24,8 @@ const Node = ({
     targetId,
     rotateAngle,
   } = node
-  const refetch = useContext(NodeRefetchContext)
-  const runMutation = useContext(NodeMutationContext)
-  const { setTraceType } = useContext(TraceContext)
   const setHeadNode = useContext(HeadNodeContext)
-
-  const handleGetSubmit = (e, get) => {
-    e.preventDefault()
-    setTraceType('get')
-    refetch({ key: get })
-  }
-
-  const handleSetSubmit = (e, key, value) => {
-    e.preventDefault()
-    setTraceType('set')
-    runMutation({ variables: { key, value } })
-  }
+  const { setTraceType } = useContext(TraceContext)
 
   let relations = []
   if (inTrace) {
@@ -58,6 +40,7 @@ const Node = ({
     if (!headNode) {
       const port = `8${node.addr.split(':')[1].slice(1)}`
       setHeadNode(port)
+      setTraceType('')
     }
   }
 
@@ -74,15 +57,14 @@ const Node = ({
         relations={relations}
       >
         <div>
+          {(headNode && val) && (
+            <p>
+              {queryKey}
+              :
+              {val}
+            </p>
+          )}
           <p className="addr">{`:${addr.split(':')[1]}`}</p>
-          {
-            headNode && (
-              <>
-                <GetForm handleGetSubmit={handleGetSubmit} command="Get" />
-                <SetForm handleSetSubmit={handleSetSubmit} />
-              </>
-            )
-          }
           {
             start && (
               <p className="fingerIndices">
