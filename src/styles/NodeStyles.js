@@ -1,5 +1,9 @@
 import styled from 'styled-components'
 
+const box0 = '0 1px 3px hsla(0, 0%, 0%, .12), 0 1px 2px hsla(0, 0%, 0%, .34)'
+const box1 = '0 3px 6px hsla(0, 0%, 0%, .15)'
+const box2 = '0 5px 15px hsla(0, 0%, 0%, .15), 0 3px 6px hsla(0, 0%, 0%, .10)'
+
 const NodeStyles = styled.li`
   cursor: pointer;
   display: flex;
@@ -9,7 +13,8 @@ const NodeStyles = styled.li`
   border-radius: 50%;
   background: ${(props) => ((props.isFinger || props.headNode) ? 'hsl(218, 12%, 80%)' : 'hsl(218, 12%, 92%)')};
   background: ${(props) => (props.inTrace && 'hsl(218, 25%, 77%)')};
-  box-shadow: none;
+  box-shadow: ${(props) => (props.inTrace ? `${box2}` : `${box1}`)};
+  box-shadow: ${(props) => (!props.isFinger && `${box0}`)};
   transition: box-shadow .15s ease;
   
   width: 125px;
@@ -37,9 +42,9 @@ const NodeStyles = styled.li`
     font-weight: ${(props) => ((props.isFinger || props.headNode || props.inTrace) ? '500' : '400')};
   }
   &:hover {
-    box-shadow: ${(props) => (props.inTrace ? '1px 1px 1px 1px hsl(218, 25%, 77%), 1px 1px 1px 1px hsl(218, 25%, 77%) inset' : '1px 1px 1px 1px hsl(218, 12%, 75%), 1px 1px 1px hsl(218, 12%, 88%) inset')};
+    box-shadow: ${box2};
     text-shadow: ${(props) => ((props.isFinger || props.headNode || props.inTrace) ? '.1px .1px hsl(218, 5%, 18%)' : '.1px .1px hsl(218, 5%, 35%)')};
   }
-  `
+`
 
 export default NodeStyles

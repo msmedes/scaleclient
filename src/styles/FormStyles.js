@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 const FormStyles = styled.form`
-  background: hsl(218, 5%, 95%);
   width: 150px;
   label {
     display: block;
@@ -32,7 +31,8 @@ const FormStyles = styled.form`
       border-color: hsl(218, 5%, 50%);
       background-color: hsl(218, 5%, 93%);
     }
-    box-shadow: 1px 1px 2px hsl(218, 5%, 25%);
+    box-shadow: 0 1px 3px hsla(0, 0%, 0%, .12);
+    box-shadow: 0 1px 2px hsla(0, 0%, 0%, .24);
   }
   button,
   input[type='submit'] {
@@ -43,7 +43,8 @@ const FormStyles = styled.form`
     border: 0;
     font-weight: 600;
     padding: 0.2rem 0.25rem;
-    box-shadow: 1px 1px 2px hsl(218, 5%, 25%);
+    box-shadow: 0 1px 3px hsla(0, 0%, 0%, .12);
+    box-shadow: 0 1px 2px hsla(0, 0%, 0%, .24);
   }
   fieldset{
     border: 0;
